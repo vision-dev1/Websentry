@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WebSentry - Website Vulnerability Scanner</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1392ec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-[#111518] dark:text-white font-display overflow-x-hidden antialiased selection:bg-primary/30">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root">
+        <nav
+            class="sticky top-0 z-50 w-full border-b border-[#f0f3f4] dark:border-slate-800 bg-white/90 dark:bg-[#101a22]/90 backdrop-blur-md">
+            <div class="layout-container flex h-full grow flex-col">
+                <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center">
+                    <div class="layout-content-container flex w-full max-w-[1200px] items-center justify-between py-4">
+                        <div class="flex items-center gap-4 text-[#111518] dark:text-white">
+                            <div class="text-primary">
+                                <span class="material-symbols-outlined text-3xl">shield_lock</span>
+                            </div>
+                            <h2
+                                class="text-[#111518] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                                WebSentry</h2>
+                        </div>
+                        <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+                            <div class="flex items-center gap-9">
+                                <a class="text-[#111518] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal"
+                                    href="#features">Features</a>
+                                <a class="text-[#111518] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal"
+                                    href="#how-it-works">How it Works</a>
+                                <a class="text-[#111518] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal"
+                                    href="#faq">FAQ</a>
+                            </div>
+                            <button
+                                class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-sm">
+                                <span class="truncate">Get Started</span>
+                            </button>
+                        </div>
+                        <div class="md:hidden text-[#111518] dark:text-white">
+                            <span class="material-symbols-outlined">menu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <header class="relative w-full bg-white dark:bg-background-dark pt-12 pb-20 lg:pt-24 lg:pb-32">
+            <div
+                class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 pointer-events-none">
+            </div>
+            <div class="layout-container flex h-full grow flex-col relative z-10">
+                <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center">
+                    <div
+                        class="layout-content-container flex flex-col lg:flex-row gap-12 max-w-[1200px] flex-1 items-center">
+                        <div class="flex flex-col gap-6 flex-1 text-center lg:text-left">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary w-fit mx-auto lg:mx-0">
+                                <span class="material-symbols-outlined text-sm font-bold">bolt</span>
+                                <span class="text-xs font-bold uppercase tracking-wide">New: AI Threat Detection</span>
+                            </div>
+                            <h1
+                                class="text-[#111518] dark:text-white text-4xl lg:text-6xl font-black leading-tight tracking-[-0.033em]">
+                                Secure Your Web Presence <span class="text-primary">Instantly</span>.
+                            </h1>
+                            <h2
+                                class="text-slate-600 dark:text-slate-400 text-lg font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                                Don't wait for a breach. Enter your website URL to detect critical vulnerabilities, SQL
+                                injections, and XSS exploits before hackers do.
+                            </h2>
+                            <div class="flex gap-4 justify-center lg:justify-start pt-2">
+                                <div class="flex -space-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-slate-800 bg-cover"
+                                        data-alt="User avatar 1"
+                                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_pRebWQn_8iRxykrCMrRF8oZgSajPXAd_drFNKTb90uyAMnwmZ7HQVtm0Xo_7quYsyEMg5Ed7GleZPuhpch7DS04jRCY75PKCE1pFGcTi66CYjn2Qfss8OZ-47WhVbMJ7DWOmKhGSXLisQMG0RftoaFcgi5U28VrrLb79_cfhzRx0o0CMRbprcXZJf5YgWsBLovjJfohjgCxdXraSpOdqlSW8AOg6Cdp8nncJdnrSq1OkFMY2wSjV2jmlk7-46HY86DLLVHB3OYU');">
+                                    </div>
+                                    <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-slate-800 bg-cover"
+                                        data-alt="User avatar 2"
+                                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpZ-S-dbrNM4zGdj7lwBLSfjsERf1nIDaLngVVQPCnkYM4pDM0UIN98k1jBQc59abKrrAaIzOYqeGcpWCQU7Qal7AzhQC_HzSRtboYVJHeGO-9igjJGzGj6e3B4RdyKykziGHa-L5pTr8i3dkYkjgdu6aTVWSr932vAhI9psxTxEyW0rgYVcAK-hxPFy-_tl_OZcCsByT5GYz0suc4GlAgoDj_ojdHtQPmw-cwzcITcNb7J4epcsgOlCRU0tyNgQZWoMLYYbORfUU');">
+                                    </div>
+                                    <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-slate-800 bg-cover"
+                                        data-alt="User avatar 3"
+                                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsIuN3AwkhOJzLGyE2bFYitNwprFt3kIHMxWaMEza_ZOpU_nZBYgOGqHNFK4xSf_ojd2UNyJ_UvEyz32KCWbkYZmLwcWH1FWkwwxI0warbxFazVAj79zG-tuSqGdnb-Z-vbS5NG1T4ld9q7XRK1GLW71PLAA0VNIwncByTLNFM2O-Q3nQCZ6hnn-FeJRAFPs_Eona48rPVq7yB72bMwF2HBIxcwj8fuCuqUEQgg44la09qRjafsnKVc2tR_SYuqoxSceHPflnBnIg');">
+                                    </div>
+                                </div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400 self-center">Trusted
+                                    by 10,000+ developers</span>
+                            </div>
+                        </div>
+                        <div class="w-full max-w-[480px] lg:w-[450px]">
+                            <div
+                                class="bg-white dark:bg-[#1a2632] rounded-2xl shadow-2xl shadow-primary/10 border border-slate-100 dark:border-slate-700 p-6 lg:p-8 relative overflow-hidden group">
+                                <div
+                                    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <h3 class="text-xl font-bold text-[#111518] dark:text-white mb-2">Free Vulnerability
+                                    Scan</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Full report generated in less
+                                    than 30 seconds.</p>
+                                <form class="flex flex-col gap-4">
+                                    <label class="flex flex-col gap-1.5">
+                                        <span class="text-sm font-medium text-[#111518] dark:text-slate-300">Target
+                                            URL</span>
+                                        <div
+                                            class="flex items-center rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all overflow-hidden">
+                                            <div class="pl-3 text-slate-400 flex items-center justify-center">
+                                                <span class="material-symbols-outlined text-[20px]">language</span>
+                                            </div>
+                                            <input
+                                                class="w-full bg-transparent border-none text-sm p-3 text-[#111518] dark:text-white placeholder:text-slate-400 focus:ring-0"
+                                                placeholder="https://example.com" required="" type="url" />
+                                        </div>
+                                    </label>
+                                    <button
+                                        class="flex w-full items-center justify-center rounded-lg h-12 bg-primary hover:bg-blue-600 transition-all text-white font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-transform active:scale-[0.98]"
+                                        type="button">
+                                        <span class="mr-2">Start Free Scan</span>
+                                        <span class="material-symbols-outlined text-[20px]">radar</span>
+                                    </button>
+                                </form>
+                                <div
+                                    class="mt-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-700 pt-4">
+                                    <div class="flex items-center gap-1">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-green-500">check_circle</span>
+                                        <span>SSL Check</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-green-500">check_circle</span>
+                                        <span>Malware</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-green-500">check_circle</span>
+                                        <span>Headers</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="w-full bg-white dark:bg-background-dark border-b border-slate-100 dark:border-slate-800">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10 lg:px-40 py-8">
+                <p
+                    class="text-center text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-6">
+                    Trusted by security teams at</p>
+                <div
+                    class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-3xl">cloud_circle</span>
+                        <span class="text-xl font-bold font-display">CloudSafe</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-3xl">token</span>
+                        <span class="text-xl font-bold font-display">Tokenize</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-3xl">verified_user</span>
+                        <span class="text-xl font-bold font-display">VeriTech</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-3xl">database</span>
+                        <span class="text-xl font-bold font-display">DataGuard</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full bg-[#f8faff] dark:bg-[#0d141c] py-20" id="how-it-works">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10 lg:px-40">
+                <div class="text-center mb-16">
+                    <h2 class="text-[#111518] dark:text-white text-3xl font-bold mb-4">How WebSentry Works</h2>
+                    <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Three simple steps to secure your
+                        digital infrastructure. No installation required.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-white dark:bg-[#1a2632] rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-100 dark:border-slate-800">
+                        <div
+                            class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6">
+                            <span class="material-symbols-outlined text-3xl">input</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">1. Input Target</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Simply enter your website
+                            URL or IP address. Our passive scanner requires no agents or installation.</p>
+                    </div>
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-white dark:bg-[#1a2632] rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-100 dark:border-slate-800 relative">
+                        <div
+                            class="hidden md:block absolute top-1/2 -left-4 transform -translate-y-1/2 -translate-x-1/2 text-slate-300 z-10">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                        </div>
+                        <div
+                            class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 translate-x-1/2 text-slate-300 z-10">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                        </div>
+                        <div
+                            class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6">
+                            <span class="material-symbols-outlined text-3xl animate-pulse">travel_explore</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">2. AI-Powered Analysis</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Our engine checks against
+                            5000+ known vulnerabilities, including OWASP Top 10 and zero-day threats.</p>
+                    </div>
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-white dark:bg-[#1a2632] rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-100 dark:border-slate-800">
+                        <div
+                            class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6">
+                            <span class="material-symbols-outlined text-3xl">description</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">3. Detailed Report</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Get a comprehensive PDF
+                            report with remediation steps, severity scoring, and developer-ready fixes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full bg-white dark:bg-background-dark py-20" id="features">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10 lg:px-40">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                    <div>
+                        <h2 class="text-[#111518] dark:text-white text-3xl font-bold mb-4">Enterprise-Grade Features
+                        </h2>
+                        <p class="text-slate-600 dark:text-slate-400 max-w-xl">Everything you need to secure your
+                            applications, from automated scans to compliance reporting.</p>
+                    </div>
+                    <button class="text-primary font-bold hover:underline inline-flex items-center gap-1">
+                        View all features <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div
+                        class="group p-6 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/50 transition-colors bg-white dark:bg-[#1a2632]">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">schedule</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">Real-time Monitoring</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Set up scheduled scans to run daily,
+                            weekly, or whenever code is deployed.</p>
+                    </div>
+                    <div
+                        class="group p-6 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/50 transition-colors bg-white dark:bg-[#1a2632]">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">security</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">OWASP Top 10</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Automatically test for the most critical
+                            web application security risks.</p>
+                    </div>
+                    <div
+                        class="group p-6 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/50 transition-colors bg-white dark:bg-[#1a2632]">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">api</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">API Access</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Integrate WebSentry directly into your
+                            CI/CD pipeline with our robust API.</p>
+                    </div>
+                    <div
+                        class="group p-6 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/50 transition-colors bg-white dark:bg-[#1a2632]">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">PDF Reporting</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Generate white-label reports for clients
+                            or internal stakeholders instantly.</p>
+                    </div>
+                    <div
+                        class="group p-6 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/50 transition-colors bg-white dark:bg-[#1a2632]">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">Instant Alerts</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Get notified via Email, Slack, or Teams
+                            immediately when a vulnerability is found.</p>
+                    </div>
+                    <div
+                        class="group p-6 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/50 transition-colors bg-white dark:bg-[#1a2632]">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">support_agent</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#111518] dark:text-white mb-2">Expert Support</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Our security analysts are available 24/7
+                            to help you understand complex findings.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full bg-[#f8faff] dark:bg-[#0d141c] py-20" id="faq">
+            <div class="max-w-[800px] mx-auto px-4 md:px-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-[#111518] dark:text-white text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                    <p class="text-slate-600 dark:text-slate-400">Common questions about our scanning technology and
+                        plans.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <details
+                        class="group bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer open:ring-2 open:ring-primary/20">
+                        <summary
+                            class="flex justify-between items-center font-bold text-[#111518] dark:text-white text-lg">
+                            Is the scan safe for my website?
+                            <span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                        </summary>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Yes, absolutely. WebSentry performs passive and non-intrusive active scanning. We simulate
+                            traffic patterns that do not disrupt your service or modify your data. It is safe for
+                            production environments.
+                        </p>
+                    </details>
+                    <details
+                        class="group bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer open:ring-2 open:ring-primary/20">
+                        <summary
+                            class="flex justify-between items-center font-bold text-[#111518] dark:text-white text-lg">
+                            Do I need to install any software?
+                            <span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                        </summary>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            No. WebSentry is a 100% cloud-based SaaS platform. You can start scanning simply by entering
+                            your URL. For internal networks, we offer a Docker container agent, but it is optional.
+                        </p>
+                    </details>
+                    <details
+                        class="group bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer open:ring-2 open:ring-primary/20">
+                        <summary
+                            class="flex justify-between items-center font-bold text-[#111518] dark:text-white text-lg">
+                            How long does a scan take?
+                            <span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                        </summary>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Quick scans typically finish in under 60 seconds. Full, deep-dive vulnerability assessments
+                            can take anywhere from 10 to 45 minutes depending on the size and complexity of your
+                            application.
+                        </p>
+                    </details>
+                    <details
+                        class="group bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer open:ring-2 open:ring-primary/20">
+                        <summary
+                            class="flex justify-between items-center font-bold text-[#111518] dark:text-white text-lg">
+                            What happens if vulnerabilities are found?
+                            <span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                        </summary>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            We provide a detailed report categorized by severity (Critical, High, Medium, Low). Each
+                            finding includes remediation steps, code snippets, and references to help your developers
+                            fix the issue fast.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+        <section class="w-full bg-primary py-20">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10 flex flex-col items-center text-center">
+                <h2 class="text-white text-3xl md:text-4xl font-black mb-6">Ready to secure your application?</h2>
+                <p class="text-blue-100 text-lg mb-8 max-w-2xl">Join thousands of developers and security professionals
+                    who trust WebSentry. Start your free scan today.</p>
+                <button
+                    class="bg-white text-primary text-lg font-bold py-4 px-10 rounded-xl hover:bg-blue-50 transition-colors shadow-lg">
+                    Get Started for Free
+                </button>
+            </div>
+        </section>
+        <footer class="w-full bg-[#101a22] text-slate-400 py-12 border-t border-slate-800">
+            <div class="max-w-[1200px] mx-auto px-4 md:px-10 lg:px-40">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                    <div class="col-span-1 md:col-span-1">
+                        <div class="flex items-center gap-3 text-white mb-6">
+                            <span class="material-symbols-outlined text-3xl text-primary">shield_lock</span>
+                            <span class="text-xl font-bold">WebSentry</span>
+                        </div>
+                        <p class="text-sm leading-relaxed mb-6">
+                            The most advanced automated vulnerability scanner for modern web applications.
+                        </p>
+                        <div class="flex gap-4">
+                            <a class="hover:text-white transition-colors" href="#"><span
+                                    class="material-symbols-outlined">alternate_email</span></a>
+                            <a class="hover:text-white transition-colors" href="#"><span
+                                    class="material-symbols-outlined">public</span></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-6">Product</h4>
+                        <ul class="flex flex-col gap-3 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#">Features</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Integrations</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Changelog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-6">Resources</h4>
+                        <ul class="flex flex-col gap-3 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">API Reference</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-6">Legal</h4>
+                        <ul class="flex flex-col gap-3 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+                    <p>© 2024 WebSentry Inc. All rights reserved. Made by <a href="https://visionkc.com.np"
+                            class="hover:text-primary transition-colors" target="_blank">Vision</a>.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span>All systems operational</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
