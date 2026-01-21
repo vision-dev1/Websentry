@@ -86,4 +86,10 @@ The interface features a modern, dark-themed design with real-time progress indi
 
 ## License
 
-MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+## Author
+**Vision KC**
+[GitHub](https://github.com/vision-dev1)
+[Portfolio](https://visionkc.com.np)
