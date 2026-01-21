@@ -49,8 +49,8 @@ WebSentry/
 
 1. **Clone the repository** (or download source):
    ```bash
-   git clone https://github.com/yourusername/websentry.git
-   cd websentry
+   git clone https://github.com/vision-dev1/Websentry.git
+   cd Websentry
    ```
 
 2. **Install Dependencies**:
