@@ -1,3 +1,5 @@
+// Codes By Visionnn
+
 document.addEventListener('DOMContentLoaded', () => {
     const scanForm = document.querySelector('form');
     const urlInput = document.querySelector('input[type="url"]');
