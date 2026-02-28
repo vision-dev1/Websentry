@@ -1,4 +1,4 @@
-#!/bin/bash
+# Codes By Visionnn
 
 echo "Website Vulnerability Scanner"
 echo "============================="
