@@ -8,6 +8,17 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
+## 🌐 Live Demo
+
+🚀 **Websentry is Live!**
+
+👉 **Try it here:**  
+### [Websentry](https://websentry-j3is.onrender.com/)
+
+_No installation needed. Just open and start being productive._
+
+</div>
+
 ## Overview
 
 **WebSentry** is a lightweight, comprehensive web application vulnerability scanner designed for ethical security testing. It combines a robust Python backend for scanning logic with a responsive HTML/JS frontend for an intuitive user experience.
