@@ -54,7 +54,7 @@ WebSentry/
 
 1. **Clone the repository** (or download source):
    ```bash
-   git clone https://github.com/vision-dev1/Websentry.git
+   git clone https://github.com/visionxstack/Websentry.git
    cd Websentry
    ```
 
@@ -96,5 +96,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 ## Author
 **Vision KC**<br>
-[GitHub](https://github.com/vision-dev1)<br>
+[GitHub](https://github.com/visionxstack)<br>
 [Portfolio](https://visionkc.com.np)
