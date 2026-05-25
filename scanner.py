@@ -1,4 +1,3 @@
-# Codes By Visionnn
 import http.server
 import socketserver
 import json
@@ -8,6 +7,7 @@ import ssl
 import datetime
 import socket
 from urllib.parse import urlparse
+import ipaddress
 
 dependencies_available = True
 try:
@@ -31,6 +31,22 @@ except ImportError:
             return MockRequestsResponse()
     
     requests = MockRequests()
+
+def is_safe_url(url):
+    try:
+        parsed = urlparse(url)
+        hostname = parsed.hostname
+        if not hostname:
+            return False
+            
+        ip = socket.gethostbyname(hostname)
+        ip_obj = ipaddress.ip_address(ip)
+        
+        if ip_obj.is_private or ip_obj.is_loopback or ip_obj.is_link_local:
+            return False
+        return True
+    except Exception:
+        return False
 
 class VulnerabilityScanner:
     def __init__(self):
@@ -245,7 +261,7 @@ class VulnerabilityScanner:
             try:
                 self.results["checks"][check_name] = check_function(url)
             except Exception as e:
-                self.results["checks"][check_name] = {"status": "error", "message": f"Failed to run check: {str(e)}"}
+                self.results["checks"][check_name] = {"status": "error", "message": "check failed"}
         
         self.scan_log.append(self.results)
         
@@ -257,30 +273,41 @@ class VulnerabilityScanner:
             filename = f"scan_logs/scan_{timestamp}.json"
             with open(filename, 'w') as f:
                 json.dump(self.results, f, indent=2)
-        except Exception as e:
-            print(f"Error saving scan log: {e}")
+        except Exception:
+            pass
         
         return self.results
 
 class WebRequestHandler(http.server.BaseHTTPRequestHandler):
-    """Serves only the /scan API endpoint. Static files are handled by the React frontend."""
-
     def _send_cors_headers(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
+        origin = self.headers.get('Origin')
+        allowed_origins = ['http://localhost:3000', 'http://127.0.0.1:3000']
+        if origin in allowed_origins:
+            self.send_header('Access-Control-Allow-Origin', origin)
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
 
     def do_OPTIONS(self):
-        """Handle CORS preflight requests from the Vite dev server."""
         self.send_response(204)
         self._send_cors_headers()
         self.end_headers()
 
     def do_POST(self):
         if self.path == '/scan':
-            content_length = int(self.headers['Content-Length'])
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 1024 * 1024:
+                self.send_response(413)
+                self.end_headers()
+                return
+
             post_data = self.rfile.read(content_length)
-            data = json.loads(post_data.decode('utf-8'))
+            
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+            except Exception:
+                self.send_response(400)
+                self.end_headers()
+                return
 
             url = data.get('url')
             advanced = data.get('advanced', False)
@@ -290,11 +317,19 @@ class WebRequestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_header('Content-type', 'application/json')
                 self._send_cors_headers()
                 self.end_headers()
-                self.wfile.write(json.dumps({"error": "URL is required"}).encode())
+                self.wfile.write(json.dumps({"error": "url is required"}).encode())
                 return
 
             if not url.startswith('http'):
                 url = 'https://' + url
+
+            if not is_safe_url(url):
+                self.send_response(400)
+                self.send_header('Content-type', 'application/json')
+                self._send_cors_headers()
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": "invalid or internal url"}).encode())
+                return
 
             scanner = VulnerabilityScanner()
             results = scanner.scan_website(url, advanced)
@@ -310,7 +345,6 @@ class WebRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_GET(self):
-        """Handle health check or direct browser access."""
         if self.path == '/':
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
@@ -318,16 +352,12 @@ class WebRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({
                 "status": "online",
-                "message": "WebSentry API is running",
+                "message": "api is running",
                 "endpoint": "/scan (POST)"
             }).encode())
         else:
             self.send_response(404)
             self.end_headers()
-
-    def log_message(self, format, *args):
-        """Custom log format."""
-        print(f"[WebSentry API] {self.address_string()} - {format % args}")
 
 
 def start_server():
@@ -336,11 +366,8 @@ def start_server():
 
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-    print(f"WebSentry API server running at http://localhost:{PORT}/scan")
-    print("Frontend: run 'npm run dev' inside the frontend/ directory.")
-    print("Press Ctrl+C to stop.\n")
-
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print(f"server running at http://127.0.0.1:{PORT}/scan")
+    with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
         httpd.serve_forever()
 
 
